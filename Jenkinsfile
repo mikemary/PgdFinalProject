@@ -17,12 +17,16 @@ pipeline{
                 sh 'mvn compile'
             }
         }
+<<<<<<< HEAD
+        
+=======
         stage('CodeReview'){
             agent any
             steps{
                 sh 'mvn pmd:pmd'
             }
         }
+>>>>>>> 9142748260536f8f133efb4828d2faec6cdf9031
         stage('UnitTest'){
             steps{
                 sh 'mvn test'
