@@ -1,0 +1,33 @@
+pipeline{
+    tools{
+        maven 'mymaven'
+    }
+    agent any
+    
+    stages{
+        stage('Checkout on git'){
+            agent any
+            steps{
+                git 'https://github.com/mikemary/PgdFinalProject.git'
+            }
+        }
+        stage('Compile'){
+            agent any
+            steps{
+                sh 'mvn compile'
+            }
+        }
+        
+        stage('UnitTest'){
+            steps{
+                sh 'mvn test'
+            }
+        }
+        
+        stage('Package'){
+            steps{
+                sh 'mvn package'
+            }
+        }
+    }
+}
