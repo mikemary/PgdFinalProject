@@ -32,7 +32,7 @@ pipeline{
         stage('Building image') {
             steps{
                 script {
-                    sh 'docker build -t ABCtechnologyapp .'
+                    sh 'docker build --privileged -t ABCtechnologyapp .'
         
                 }
            }
