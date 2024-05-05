@@ -32,7 +32,7 @@ pipeline{
         stage('Building image') {
             steps{
                 script {
-                    sh 'docker build -t abctechnologyapp .'
+                    sh 'docker build -t abctechnologies:$BUILD_NUMBER  .'
         
                 }
            }
