@@ -11,12 +11,12 @@ pipeline{
             }
         }
     }
-        stage("Compile the Code" ){
+        stage('Compile the Code' ){
              steps{
                sh 'mvn complie'
             }
         }
-        stage("Package the Code" ){
+        stage('Package the Code' ){
             steps{
                sh 'mvn clean install package'
             }
