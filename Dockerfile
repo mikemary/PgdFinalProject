@@ -1,5 +1,5 @@
 FROM tomcat:latest
-COPY target/ABCtechnologies-1.0.war ABCtechnologies-1.0.war .
+COPY ./target/ABCtechnologies-1.0.war /usr/local/tomcat/webapps .
 EXPOSE 8080
-CMD ["(link unavailable)", "run"]
+CMD ["catalina.sh", "run"]
 
