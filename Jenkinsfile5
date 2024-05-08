@@ -36,16 +36,20 @@ pipeline{
             steps{
                 script {
                     sh 'docker build -t abctechnologies:$BUILD_NUMBER  .'
-        
+                    }
                 }
+         
         }
-          stage('Push image to Docker hub') {
-            steps{
-                script {
-                    sh 'docker build -t abctechnologies:$BUILD_NUMBER  .'
-        
+             stage('Push Docker Image to Docker Hub'){
+                steps{
+                 sh 'docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD'
+                 sh 'docker tag abctechnologies $DOCKER_USERNAME/abctechnologies: latest'
+                 sh 'docker push $DOCKER_USERNAME/abctechnologieS: latest
                 }
-           }
-        }
+            }    
+                
+
+        
+        }}
     }
 }
