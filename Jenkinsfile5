@@ -1,8 +1,10 @@
 pipeline{
     tools{
         maven 'mymaven'
-        
-    }
+         }
+    env{
+    $DOCKER_USERNAME= 'moyinlola'
+    $DOCKER_PASSWORD= '@Adura1972'
     agent any
     
     stages{
@@ -31,6 +33,13 @@ pipeline{
             }
         }
         stage('Building image') {
+            steps{
+                script {
+                    sh 'docker build -t abctechnologies:$BUILD_NUMBER  .'
+        
+                }
+        }
+          stage('Push image to Docker hub') {
             steps{
                 script {
                     sh 'docker build -t abctechnologies:$BUILD_NUMBER  .'
