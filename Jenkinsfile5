@@ -7,13 +7,11 @@ pipeline{
     
     stages{
         stage('Checkout on git'){
-            agent any
             steps{
                 git 'https://github.com/mikemary/PgdFinalProject.git'
             }
         }
         stage('Compile'){
-            agent any
             steps{
                 sh 'mvn compile'
             }
