@@ -1,10 +1,8 @@
 pipeline{
     tools{
         maven 'mymaven'
-         }
-    env{
-    $DOCKER_USERNAME= 'moyinlola'
-    $DOCKER_PASSWORD= '@Adura1972'
+    }
+    
     agent any
     
     stages{
@@ -32,24 +30,38 @@ pipeline{
                 sh 'mvn package'
             }
         }
-        stage('Building image') {
+        stage('Build Docker Image'){
             steps{
-                script {
-                    sh 'docker build -t abctechnologies:$BUILD_NUMBER  .'
-                    }
+                script{
+                    sh 'docker build -t moyinlola/my-app-1.0  .'
                 }
-         
+            }
         }
-             stage('Push Docker Image to Docker Hub'){
-                steps{
-                 sh 'docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD'
-                 sh 'docker tag abctechnologies $DOCKER_USERNAME/abctechnologies: latest'
-                 sh 'docker push $DOCKER_USERNAME/abctechnologieS: latest
+
+
+        stage('Build Image and push to Dockerhub'){
+        steps{
+            script{
+                withCredentials([string(credentialsId: '', variable: 'dockerhubpwd')]) {
+    // some block
+                 }
+                    sh 'docker login -u moyinlola -p $('dockerhubpwd')'
+                    sh 'docker push moyinlola/my-app-1.0'
                 }
-            }    
-                
+            }   
+        
+        
+        
+        }
 
         
-        }}
+        
+        
+        
+        
     }
+        
+    
 }
+
+  
