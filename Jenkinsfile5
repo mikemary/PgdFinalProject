@@ -40,7 +40,7 @@ pipeline{
         stage('Push Docker Image to Dockerhub'){
         steps{
             script{
-                withCredentials([string(credentialsId: '', variable: {'dockerhubpwd'}]) {
+                withCredentials([string(credentialsId: '', variable: 'dockerhubpwd')]) {
     // some block
                   }
                  }
