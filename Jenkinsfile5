@@ -44,7 +44,7 @@ pipeline{
     // some block
                   }
                  }
-                    sh 'docker login -u moyinlola -p $('dockerhubpwd')'
+                    sh 'docker login -u moyinlola -p ${'dockerhubpwd'}'
                     sh 'docker push moyinlola/my-app-1.0'
                 }
             }   
