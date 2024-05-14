@@ -1,66 +1,52 @@
-pipeline{
-    tools{
+pipeline {
+    agent any
+    
+    tools {
         maven 'mymaven'
     }
     
-    agent any
-    
-    stages{
-        stage('Checkout on git'){
-            steps{
+    stages {
+        stage('Checkout on git') {
+            steps {
                 git 'https://github.com/mikemary/PgdFinalProject.git'
             }
         }
-        stage('Compile'){
-            steps{
+        
+        stage('Compile') {
+            steps {
                 sh 'mvn compile'
             }
         }
         
-        stage('UnitTest'){
-            steps{
+        stage('UnitTest') {
+            steps {
                 sh 'mvn test'
             }
         }
         
-        stage('Package'){
-            steps{
+        stage('Package') {
+            steps {
                 sh 'mvn package'
             }
         }
-        stage('Build Docker Image'){
-            steps{
-                script{
-                    sh 'docker build -t moyinlola/my-app-1.0  .'
+        
+        stage('Build Docker Image') {
+            steps {
+                script {
+                    sh 'docker build -t moyinlola/my-app-1.0 .'
                 }
             }
         }
 
-
-        stage('Push Docker Image to Dockerhub'){
-        steps{
-            script{
-                withCredentials([string(credentialsId: 'moyinlola', variable: 'dockerhubpwd')]) {
-    // some block
-                  }
-                 }
-                    sh 'docker login -u moyinlola -p ${dockerhubpwd}'
-                    sh 'docker push moyinlola/my-app-1.0'
+        stage('Push Docker Image to Dockerhub') {
+            steps {
+                script {
+                    withCredentials([string(credentialsId: 'moyinlola', variable: 'dockerhubpwd')]) {
+                        sh "docker login -u moyinlola -p ${dockerhubpwd}"
+                        sh 'docker push moyinlola/my-app-1.0'
+                    }
                 }
-            }   
-        
-        
-        
+            }
         }
-
-        
-        
-        
-        
-        
     }
-        
-    
-
-
-  
+}
